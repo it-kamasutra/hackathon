@@ -28,27 +28,20 @@ function TournamentTable(props) {
             )
         });
 
-    const rowsTable = players.map( (p1, i) => {
+    const rowsTable = players.map( (el, i) => {
         return <tr className="player">
+
             <th className="deletePlayer">
                 <span>+</span>
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input defaultValue={p1.fullName}></input>
+                <input defaultValue={el.fullName}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}
 
-            {   players.map((p2, j) => {
-                let game = findGame(games, p1._id, p2._id);
-                let leftScore = 0;
-                let rightScore = 0;
-                if (game) {
-                    leftScore = game.player1.winCount;
-                    rightScore = game.player2.winCount
-                }
-
+            {   players.map((p, j) => {
                 if (j == i) {
                     return <td className="intersection"></td>
                 }
@@ -57,12 +50,12 @@ function TournamentTable(props) {
                     <div className="countWrap">
                         <div className="count">
                             <div>
-                                <span className="point">{leftScore}</span>
+                                <span className="point">2</span>
                                 {/*<input className="point"></input>*/}
                             </div>
                             <span className="separator">:</span>
                             <div>
-                                <span className="point">{rightScore}</span>
+                                <span className="point">1</span>
                                 {/*<input className="point"></input>*/}
                             </div>
                         </div>
@@ -116,6 +109,7 @@ function TournamentTable(props) {
                         <td></td>
                         <td className="logo"></td>
                         {headerTournamentTable}
+
                     </tr>
 
                     {rowsTable}
