@@ -3,8 +3,20 @@ import {connect} from 'react-redux';
 import {updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
+
+function findGame(games, p1Id, p2Id) {
+    let oneGame = games.find((game) => {
+        //let id
+        return game
+    });
+
+    return oneGame;
+    // todo: implement function
+    // return found game
+}
+
 function TournamentTable(props) {
-    const {players} = props
+    const {players, games} = props;
 
     console.log(players);
 
@@ -16,20 +28,27 @@ function TournamentTable(props) {
             )
         });
 
-    const rowsTable = players.map( (el, i) => {
+    const rowsTable = players.map( (p1, i) => {
         return <tr className="player">
-
             <th className="deletePlayer">
                 <span>+</span>
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input defaultValue={el.fullName}></input>
+                <input defaultValue={p1.fullName}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}
 
-            {   players.map((p, j) => {
+            {   players.map((p2, j) => {
+                let game = findGame(games, p1._id, p2._id);
+                let leftScore = 0;
+                let rightScore = 0;
+                if (game) {
+                    leftScore = game.player1.winCount;
+                    rightScore = game.player2.winCount
+                }
+
                 if (j == i) {
                     return <td className="intersection"></td>
                 }
@@ -38,12 +57,12 @@ function TournamentTable(props) {
                     <div className="countWrap">
                         <div className="count">
                             <div>
-                                <span className="point">2</span>
+                                <span className="point">{leftScore}</span>
                                 {/*<input className="point"></input>*/}
                             </div>
                             <span className="separator">:</span>
                             <div>
-                                <span className="point">1</span>
+                                <span className="point">{rightScore}</span>
                                 {/*<input className="point"></input>*/}
                             </div>
                         </div>
@@ -97,7 +116,6 @@ function TournamentTable(props) {
                         <td></td>
                         <td className="logo"></td>
                         {headerTournamentTable}
-
                     </tr>
 
                     {rowsTable}
