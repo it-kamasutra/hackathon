@@ -95,11 +95,17 @@ const setPlayers = (players) => ({type: SET_PLAYERS, players});
 const changePlayer = (newPlayerName) => {
     return {type: CHANGE_PLAYER, newPlayerName};
 }
+const deletePlayer = () => {
+    return {type: DELETE_PLAYER, newPlayerName};
+}
 
 export const updatePlayerName = (id, fullName) => async (dispatch) => {
     const player = await API.updatePlayer(id, fullName);
     dispatch(changePlayer(player.fullName));
 };
+
+
+
 
 
 
@@ -120,6 +126,10 @@ export const addPlayerThunk = (fullName) => async (dispatch) => {
     let res = await API.addPlayer(fullName);
     console.log(res);
     dispatch(addPlayer(res.data));
+}
+export const deletePlayerThunk = (id) => async (dispatch) => {
+    let res = await API.deletePlayer(id);
+    dispatch(deletePlayer(res.data.player.id));
 }
 
 export default reducer;

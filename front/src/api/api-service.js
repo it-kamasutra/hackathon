@@ -28,6 +28,9 @@ export const API = {
     },
     stopGame(id) {
         return instance.put('games/stop')
+    },
+    deletePlayer(id){
+        return instance.delete('players',{id})
     }
 
 };
