@@ -11,7 +11,7 @@ const port = 3020
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use('/players', playersRouter);

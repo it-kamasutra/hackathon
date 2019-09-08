@@ -1,6 +1,8 @@
+const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const mongoose = require("mongoose");
+
 
 const playersScheme = new Schema({
     name: {
@@ -31,20 +33,20 @@ const gamesSchema = new Schema({
 const Players = mongoose.model("Players", playersScheme);
 const Games = mongoose.model("Game", gamesSchema);
 
-export const getPlayers = () => {
-    return Players.findAll();
+const getPlayers = () => {
+    return Players.find();
 };
 
-export const getGames = () => {
-    return Games.findAll();
+const getGames = () => {
+    return Games.find();
 };
 
-export const addPlayer = (name) => {
+const addPlayer = (name) => {
     const player = new Player({name});
     return player.save()
 };
 
-export const addGame = (player1Id, player2Id) => {
+const addGame = (player1Id, player2Id) => {
     const game = new Game({
         player1: {
             id: player1Id,
@@ -58,3 +60,11 @@ export const addGame = (player1Id, player2Id) => {
     });
     return game.save()
 };
+
+
+module.exports = {
+    getPlayers,
+    addPlayer,
+    getGames,
+    addGame
+}
