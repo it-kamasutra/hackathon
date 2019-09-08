@@ -44,8 +44,8 @@ const getGames = () => {
     return Game.find();
 };
 
-const addPlayer = (name) => {
-    const player = new Player({name});
+const addPlayer = (fullName) => {
+    const player = new Player({fullName});
     return player.save()
 };
 

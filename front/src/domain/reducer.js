@@ -1,4 +1,4 @@
-import {API} from "../Api/api-service";
+import {API} from "../api/api-service";
 
 const ADD_PLAYER = "ADD_PLAYER";
 const ADD_GAME = "ADD_GAME";
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
         case ADD_PLAYER: {
             return {
                 ...state,
-                players: [...state.players, {_id: action._id, fullName: action.fullName}]
+                players: [...state.players, {_id: action.player._id, fullName: action.player.fullName}]
             }
         }
         case ADD_GAME: {
@@ -83,8 +83,8 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-export const addPlayer = (_id, fullName) => {
-    return { type: ADD_PLAYER, _id, fullName };
+export const addPlayer = (player) => {
+    return { type: ADD_PLAYER, player };
 }
 const addGame = (startDate, endDate, _id, _id1, _id2, winCount1, winCount2) => {
     return { type: ADD_GAME, startDate, endDate, _id, _id1, _id2, winCount1, winCount2 };
@@ -110,7 +110,7 @@ export const getGames = () => async (dispatch) => {
 export const getPlayers = () => async (dispatch) => {
     let res = await API.getPlayers();
     console.log(res);
-    dispatch(setPlayers(res.data.games));
+    dispatch(setPlayers(res.data));
 }
 export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     let res = await API.addGame(player1Id, player2Id);
@@ -119,7 +119,7 @@ export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
 export const addPlayerThunk = (fullName) => async (dispatch) => {
     let res = await API.addPlayer(fullName);
     console.log(res);
-    dispatch(addPlayer(...res.data.player));
+    dispatch(addPlayer(res.data));
 }
 
 export default reducer;
