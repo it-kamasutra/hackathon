@@ -1,4 +1,4 @@
-import {API} from "../api/api-service";
+import {API} from "../Api/api-service";
 
 const ADD_PLAYER = "ADD_PLAYER";
 const ADD_GAME = "ADD_GAME";

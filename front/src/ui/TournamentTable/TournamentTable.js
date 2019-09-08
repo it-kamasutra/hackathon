@@ -31,7 +31,7 @@ function TournamentTable(props) {
         return <tr className="player">
 
             <th className="deletePlayer">
-                <span>+</span>
+                <span onClick={()=>{}>+</span>
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
