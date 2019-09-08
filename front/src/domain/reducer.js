@@ -63,7 +63,7 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-const addPlayer = (_id, fullName) => {
+export const addPlayer = (_id, fullName) => {
     return { type: ADD_PLAYER, _id, fullName };
 }
 const addGame = (startDate, endDate, _id, _id1, _id2, winCount1, winCount2) => {
