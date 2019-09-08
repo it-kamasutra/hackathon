@@ -6,14 +6,13 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const userScheme = new Schema({
-    name: {
+    fullName: {
         type: String,
         required: true
     }
 });
 
 const gameSchema = new Schema({
-    id: ObjectId,
     startDate: Date,
     endDate: Date,
     player1: {
