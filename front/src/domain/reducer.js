@@ -1,30 +1,43 @@
+
+
 const initialState = {
     players: [
         {
-            id: 1,
+            _id: "1",
             fullName: "Seryoja Borovik"
         },
         {
-            id: 2,
+            _id: "2",
             fullName: "Lesha"
         },
         {
-            id: 3,
+            _id: 3,
             fullName: "Dimych"
         }
     ],
     games: [
         {
+            startDate: new Date(),
+            endDate: new Date(),
+            _id: 1,
             player1: {
-                id: 1,
+                _id: 1,
                 winCount: 1
             },
             player2: {
-                id: 1,
+                _id: 1,
                 winCount: 1
             }
         }
     ]
-
-
 }
+
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+
+        default:
+            return state
+    }
+}
+
+export default reducer;
