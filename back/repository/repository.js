@@ -36,6 +36,9 @@ const Games = mongoose.model("Game", gamesSchema);
 const getPlayers = () => {
     return Players.find();
 };
+const deletePlayer = (id) => {
+    return Players.deleteOne({_id: id});
+};
 
 const getGames = () => {
     return Games.find();
