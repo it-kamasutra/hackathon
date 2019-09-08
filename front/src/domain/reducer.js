@@ -74,4 +74,10 @@ const changePlayer = (newPlayerName) => {
     return {type: CHANGE_PLAYER, newPlayerName};
 }
 
+export const updatePlayerName = (fullName) => (dispatch) => {
+    // setTimeout(() => {
+    //     dispatch(changePlayer(fullName))
+    // })
+}
+
 export default reducer;
