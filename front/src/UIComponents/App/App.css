@@ -70,7 +70,7 @@ td {
 }
 
 td.logo {
-    background-image: url("./img/logoDark.svg");
+    background-image: url("../../img/logoDark.svg");
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center;
