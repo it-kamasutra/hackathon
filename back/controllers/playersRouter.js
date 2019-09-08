@@ -7,7 +7,7 @@ router.get('/' , async (req, res) => {
 });
 
 router.post('/' , async (req, res) => {
-    res.send(await addPlayer(name));
+    res.send(await addPlayer(req.body.fullName));
 });
 
 router.delete('/' , async (req, res) => {
