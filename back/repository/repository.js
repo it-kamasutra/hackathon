@@ -30,18 +30,18 @@ const gamesSchema = new Schema({
     }
 })
 
-const Players = mongoose.model("Players", playersScheme);
-const Games = mongoose.model("Game", gamesSchema);
+const Player = mongoose.model("Player", playersScheme);
+const Game = mongoose.model("Game", gamesSchema);
 
 const getPlayers = () => {
-    return Players.find();
+    return Player.find();
 };
 const deletePlayer = (id) => {
-    return Players.deleteOne({_id: id});
+    return Player.deleteOne({_id: id});
 };
 
 const getGames = () => {
-    return Games.find();
+    return Game.find();
 };
 
 const addPlayer = (name) => {
