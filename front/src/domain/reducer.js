@@ -82,7 +82,9 @@ const changePlayer = (newPlayerName) => {
 
 export const updatePlayerName = (id, fullName) => async (dispatch) => {
     const player = await API.updatePlayer(id, fullName);
-    dispath(changePlayer(player.fullName));
-}
+    dispatch(changePlayer(player.fullName));
+};
+
+
 
 export default reducer;
