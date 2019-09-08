@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {updatePlayerName} from "../../domain/reducer";
+import {addGameThunk, addPlayerThunk, updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 
@@ -13,10 +13,7 @@ function findGame(games, p1Id, p2Id) {
 
 function TournamentTable(props) {
     const {players, games, updatePlayerName} = props;
-    useEffect(() => {
-        props.addPlayerThunk('someName')
-        props.addGameThunk(5, 7);
-    }, [])
+
 
 
 
@@ -30,7 +27,7 @@ function TournamentTable(props) {
             )
         });
 
-    const rowsTable = players.map( (el, i) => {
+    const rowsTable = players.map( (p1, i) => {
         return <tr className="player">
 
             <th className="deletePlayer">
@@ -38,12 +35,24 @@ function TournamentTable(props) {
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input defaultValue={el.fullName}></input>
+                <input defaultValue={p1.fullName}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}
 
-            {   players.map((p, j) => {
+            {   players.map((p2, j) => {
+                let game = findGame(games, p2._id, p1._id);
+                let leftCount = 0;
+                let rightCount = 0;
+                if (game) {
+                    leftCount = p1._id == game.player1.id
+                        ? game.player1.winCount
+                        : game.player2.winCount;
+
+                    rightCount = p2._id == game.player2.id
+                        ? game.player2.winCount
+                        : game.player1.winCount;
+                }
                 if (j == i) {
                     return <td className="intersection"></td>
                 }
@@ -52,12 +61,12 @@ function TournamentTable(props) {
                     <div className="countWrap">
                         <div className="count">
                             <div>
-                                <span className="point">2</span>
+                                <span className="point">{leftCount}</span>
                                 {/*<input className="point"></input>*/}
                             </div>
                             <span className="separator">:</span>
                             <div>
-                                <span className="point">1</span>
+                                <span className="point">{rightCount}</span>
                                 {/*<input className="point"></input>*/}
                             </div>
                         </div>
@@ -228,5 +237,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    addPlayer, updatePlayerName
+    addPlayer, updatePlayerName, addPlayerThunk, addGameThunk
 })(TournamentTable);
