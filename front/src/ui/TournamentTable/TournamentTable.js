@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {updatePlayerName} from "../../domain/reducer";
+import {addPlayer} from "../../domain/reducer";
 
 function TournamentTable(props) {
-    const {players, updatePlayerName} = props;
+    const {players} = props
 
     console.log(players);
 
@@ -14,9 +15,6 @@ function TournamentTable(props) {
                 </th>
             )
         });
-    const editPlayer =(event)=> {
-        updatePlayerName(event.target.value)
-    }
 
     const rowsTable = players.map( (el, i) => {
         return <tr className="player">
@@ -26,7 +24,7 @@ function TournamentTable(props) {
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input onBlur={editPlayer} defaultValue={el.fullName}></input>
+                <input defaultValue={el.fullName}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}
@@ -214,4 +212,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {updatePlayerName})(TournamentTable);
+
+export default connect(mapStateToProps, {
+    addPlayer, updatePlayerName
+})(TournamentTable);
