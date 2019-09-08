@@ -4,25 +4,19 @@ import {updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 function TournamentTable(props) {
-    const {players, updatePlayerName} = props
+    const {players, games, updatePlayerName} = props;
 
     console.log(players);
 
-    const headerTournamentTable = players.map(pl => {
-        return (
-            <th id={pl.id} className="playerName ">
-                {pl.fullName}
-            </th>
-        )
-    });
+    const headerTournamentTable = players.map( pl => {
+            return (
+                <th className="playerName ">
+                    {pl.fullName}
+                </th>
+            )
+        });
 
-    const onUpdateNameBlur = (event) => {
-        updatePlayerName(event.currentTarget.id, event.currentTarget.value)
-    };
-    const onAddPlayer = () => {
-        addPlayer()
-    };
-    const rowsTable = players.map((el, i) => {
+    const rowsTable = players.map( (el, i) => {
         return <tr className="player">
 
             <th className="deletePlayer">
@@ -30,12 +24,12 @@ function TournamentTable(props) {
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input onBlur={onUpdateNameBlur} defaultValue={el.fullName}></input>
+                <input defaultValue={el.fullName}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}
 
-            {players.map((p, j) => {
+            {   players.map((p, j) => {
                 if (j == i) {
                     return <td className="intersection"></td>
                 }
@@ -58,7 +52,7 @@ function TournamentTable(props) {
                 </td>
             })}
 
-            {/*     <td className="countCell current">
+       {/*     <td className="countCell current">
                 <div className="countWrap">
                     <div className="count">
                         <div>
@@ -96,19 +90,19 @@ function TournamentTable(props) {
 
 
     return (
-        <div className="tournametTableWrapper">
-            <table id="tournametCountTable">
+            <div className="tournametTableWrapper">
+                <table id="tournametCountTable">
 
-                <tr className="tableHeader">
-                    <td></td>
-                    <td className="logo"></td>
-                    {headerTournamentTable}
+                    <tr className="tableHeader">
+                        <td></td>
+                        <td className="logo"></td>
+                        {headerTournamentTable}
 
-                </tr>
+                    </tr>
 
-                {rowsTable}
+                    {rowsTable}
 
-                {/*  <tr className="player">
+                  {/*  <tr className="player">
 
                         <th className="deletePlayer">
                             <span>+</span>
@@ -201,12 +195,12 @@ function TournamentTable(props) {
                         <td className="intersection"></td>
                     </tr>
 */}
-            </table>
-            <div className="addBtn">
-                <button className="addPlayerBtn" onClick={onAddPlayer}>+</button>
-                <span>Добавьте участников</span>
+                </table>
+                <div className="addBtn">
+                    <button className="addPlayerBtn">+</button>
+                    <span>Добавьте участников</span>
+                </div>
             </div>
-        </div>
 
     );
 }

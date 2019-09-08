@@ -7,6 +7,7 @@ router.get('/' , async (req, res) => {
 });
 
 router.post('/' , async (req, res) => {
+    console.log(req);
     res.send(await addGame(req.body.fullName));
 });
 
