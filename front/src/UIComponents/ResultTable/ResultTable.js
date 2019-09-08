@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from "react-redux";
 
-const ResultTable = () =>{
+const ResultTable = (props) =>{
     return (
         <div className="resultsTableWrapper">
             <table id="resultsTable">
@@ -17,7 +18,24 @@ const ResultTable = () =>{
                     </th>
                 </tr>
 
-                <tr className="player">
+                { props.players.map((p, i) => {
+                    return <tr className="player">
+                        <td className="countCell">
+                            <span>{i + 1}</span>
+                        </td>
+
+                        <td className="countCell name">
+                            <span>{p.fullName}</span>
+                        </td>
+
+                        <td className="countCell">
+                            <span>12</span>
+                        </td>
+                    </tr>
+
+                }) }
+
+                {/*<tr className="player">
                     <td className="countCell">
                         <span>1</span>
                     </td>
@@ -72,11 +90,19 @@ const ResultTable = () =>{
                         <span>9</span>
                     </td>
                 </tr>
-
+*/}
             </table>
 
         </div>
     );
 }
 
-export default ResultTable;
+const mapStateToProps = (state) => {
+    return {
+        players: state.players,
+        games: state.games
+    }
+}
+
+export default connect(mapStateToProps)(ResultTable);
+
