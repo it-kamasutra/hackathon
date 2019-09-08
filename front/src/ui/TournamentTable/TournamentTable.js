@@ -4,17 +4,21 @@ import {updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 function TournamentTable(props) {
-    const {players} = props
+    const {players, updatePlayerName} = props
 
     console.log(players);
 
     const headerTournamentTable = players.map( pl => {
             return (
-                <th className="playerName ">
+                <th id={pl.id} className="playerName ">
                     {pl.fullName}
                 </th>
             )
         });
+
+    const onUpdateNameBlur = (event) => {
+        updatePlayerName(event.currentTarget.id, event.currentTarget.value)
+    }
 
     const rowsTable = players.map( (el, i) => {
         return <tr className="player">
@@ -24,7 +28,7 @@ function TournamentTable(props) {
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input defaultValue={el.fullName}></input>
+                <input onBlur={onUpdateNameBlur} defaultValue={el.fullName}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}

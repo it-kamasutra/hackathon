@@ -1,3 +1,5 @@
+import {API} from "../Api/api-service";
+
 const ADD_PLAYER = "ADD_PLAYER";
 const ADD_GAME = "ADD_GAME";
 const CHANGE_PLAYER = "CHANGE_PLAYER";
@@ -78,10 +80,9 @@ const changePlayer = (newPlayerName) => {
     return {type: CHANGE_PLAYER, newPlayerName};
 }
 
-export const updatePlayerName = (fullName) => (dispatch) => {
-    // setTimeout(() => {
-    //     dispatch(changePlayer(fullName))
-    // })
+export const updatePlayerName = (id, fullName) => async (dispatch) => {
+    const player = await API.updatePlayer(id, fullName);
+    dispath(changePlayer(player.fullName));
 }
 
 export default reducer;
