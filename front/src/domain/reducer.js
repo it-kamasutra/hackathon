@@ -23,11 +23,11 @@ const initialState = {
             _id: 1,
             player1: {
                 id: "1",
-                winCount: 0
+                winCount: 2
             },
             player2: {
                 id: "2",
-                winCount: 2
+                winCount: 1
             }
         }
     ]
