@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 
 const playersScheme = new Schema({
-    name: {
+    fullName: {
         type: String,
         required: true
     }

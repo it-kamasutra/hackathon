@@ -220,7 +220,7 @@ function TournamentTable(props) {
 */}
                 </table>
                 <div className="addBtn">
-                    <button className="addPlayerBtn">+</button>
+                    <button onClick={(()=>{props.addPlayerThunk("player new");})} className="addPlayerBtn">+</button>
                     <span>Добавьте участников</span>
                 </div>
             </div>
