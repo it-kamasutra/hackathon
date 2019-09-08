@@ -7,6 +7,7 @@ router.get('/' , async (req, res) => {
 });
 
 router.post('/' , async (req, res) => {
+    debugger
     res.send(await addPlayer(req.body.fullName));
 });
 

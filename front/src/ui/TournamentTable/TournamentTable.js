@@ -3,8 +3,22 @@ import {connect} from 'react-redux';
 import {updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
+
+function findGame(games, p1Id, p2Id) {
+    let oneGame = (games.find( el =>
+        (el.player1.id === p1Id && el.player2.id === p2Id)
+        || ( el.player2.id === p1Id && el.player1.id === p2Id)));
+    return oneGame;
+}
+
 function TournamentTable(props) {
     const {players, games, updatePlayerName} = props;
+    useEffect(() => {
+        props.addPlayerThunk('someName')
+        props.addGameThunk(5, 7);
+    }, [])
+
+
 
     console.log(players);
 

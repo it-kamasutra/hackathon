@@ -1,6 +1,7 @@
 const ADD_PLAYER = "ADD_PLAYER";
 const ADD_GAME = "ADD_GAME";
-const SET_GAME = "SET_GAME";
+const SET_GAMES = "SET_GAMES";
+const SET_PLAYERS = "SET_PLAYERS";
 const CHANGE_PLAYER = "CHANGE_PLAYER";
 
 const initialState = {
@@ -21,11 +22,11 @@ const initialState = {
             _id: 1,
             player1: {
                 id: "1",
-                winCount: 0
+                winCount: 2
             },
             player2: {
                 id: "2",
-                winCount: 2
+                winCount: 1
             }
         }
     ]
@@ -57,10 +58,16 @@ const reducer = (state = initialState, action) => {
                 }]
             }
         }
-        case SET_GAME : {
+        case SET_GAMES : {
             return {
                 ...state,
                 games: action.games
+            }
+        }
+        case SET_PLAYERS : {
+            return {
+                ...state,
+                players: action.players
             }
         }
         case CHANGE_PLAYER: {
@@ -80,7 +87,8 @@ export const addPlayer = (_id, fullName) => {
 const addGame = (startDate, endDate, _id, _id1, _id2, winCount1, winCount2) => {
     return { type: ADD_GAME, startDate, endDate, _id, _id1, _id2, winCount1, winCount2 };
 }
-const setGames = (games) => ({type: SET_GAME, games});
+const setGames = (games) => ({type: SET_GAMES, games});
+const setPlayers = (players) => ({type: SET_PLAYERS, players});
 
 const changePlayer = (newPlayerName) => {
     return {type: CHANGE_PLAYER, newPlayerName};
@@ -95,13 +103,21 @@ export const updatePlayerName = (id, fullName) => async (dispatch) => {
 
 export const getGames = () => async (dispatch) => {
     let res = await API.getGames();
-    console.log(res);
     dispatch(setGames(res.data.games));
+}
+export const getPlayers = () => async (dispatch) => {
+    let res = await API.getPlayers();
+    console.log(res);
+    dispatch(setPlayers(res.data.games));
 }
 export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     let res = await API.addGame(player1Id, player2Id);
-    console.log(res);
     dispatch(addGame(...res.data.game));
+}
+export const addPlayerThunk = (fullName) => async (dispatch) => {
+    let res = await API.addPlayer(fullName);
+    console.log(res);
+    dispatch(addPlayer(...res.data.player));
 }
 
 export default reducer;
