@@ -96,12 +96,10 @@ export const updatePlayerName = (fullName) => (dispatch) => {
 
 export const getGames = () => async (dispatch) => {
     let res = await API.getGames();
-    console.log(res);
     dispatch(setGames(res.data.games));
 }
 export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     let res = await API.addGame(player1Id, player2Id);
-    console.log(res);
     dispatch(addGame(...res.data.game));
 }
 

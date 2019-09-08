@@ -5,14 +5,10 @@ import {addPlayer} from "../../domain/reducer";
 
 
 function findGame(games, p1Id, p2Id) {
-    let oneGame = games.find((game) => {
-        //let id
-        return game
-    });
-
+    let oneGame = (games.find( el =>
+        (el.player1.id === p1Id && el.player2.id === p2Id)
+        || ( el.player2.id === p1Id && el.player1.id === p2Id)));
     return oneGame;
-    // todo: implement function
-    // return found game
 }
 
 function TournamentTable(props) {
