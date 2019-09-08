@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {addGameThunk, addPlayerThunk, updatePlayerName} from "../../domain/reducer";
+import {addGameThunk, addPlayerThunk, updatePlayerName, getGames, getPlayers, updateGameScore} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 
@@ -13,6 +13,13 @@ function findGame(games, p1Id, p2Id) {
 
 function TournamentTable(props) {
     const {players, games, updatePlayerName} = props;
+
+    useEffect(() => {
+        props.getPlayers();
+        props.getGames();
+    }, []);
+
+
     console.log(players);
 
     const headerTournamentTable = players.map( pl => {
@@ -24,7 +31,7 @@ function TournamentTable(props) {
         });
 
     const rowsTable = players.map( (p1, i) => {
-        return <tr className="player">
+        return <tr className="player" key={p1._id}>
 
             <th className="deletePlayer">
                 <span>+</span>
@@ -34,10 +41,11 @@ function TournamentTable(props) {
                 <input defaultValue={p1.fullName}></input>
             </th>
 
-            {/*<td className="intersection"></td>*/}
+
 
             {   players.map((p2, j) => {
-                return <Cell p1={p1} p2={p2} games={games}/>
+                if (i === j) return <td className="intersection"></td>
+                return <Cell key={i+ "-" + j} addGameThunk={props.addGameThunk} updateGameScore={props.updateGameScore} p1={p1} p2={p2} games={games}/>
             })}
 
        {/*     <td className="countCell current">
@@ -90,99 +98,7 @@ function TournamentTable(props) {
 
                     {rowsTable}
 
-                  {/*  <tr className="player">
 
-                        <th className="deletePlayer">
-                            <span>+</span>
-                        </th>
-                        <th className="playerName">
-                            <span >Валера</span>
-                            <input defaultValue='Саша'></input>
-                        </th>
-
-                        <td className="countCell">
-                            <div className="countWrap">
-                                <div className="count">
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                    <span className="separator">:</span>
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </td>
-
-                        <td className="intersection"></td>
-
-                        <td className="countCell">
-                            <div className="countWrap">
-                                <div className="count">
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                    <span className="separator">:</span>
-                                    <div>
-                                        <span class="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-
-                    </tr>
-
-                    <tr className="player">
-
-                        <th className="deletePlayer">
-                            <span>+</span>
-                        </th>
-                        <th className="playerName">
-                            <span >Валера</span>
-                            <input defaultValue='Саша'></input>
-                        </th>
-
-                        <td className="countCell">
-                            <div className="countWrap">
-                                <div className="count">
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                    <span className="separator">:</span>
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </td>
-
-                        <td className="countCell">
-                            <div className="countWrap">
-                                <div className="count">
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                    <span className="separator">:</span>
-                                    <div>
-                                        <span className="point">0</span>
-                                        <input className="point"></input>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td className="intersection"></td>
-                    </tr>
-*/}
                 </table>
                 <div className="addBtn">
                     <button onClick={(()=>{props.addPlayerThunk("player new");})} className="addPlayerBtn">+</button>
@@ -194,6 +110,8 @@ function TournamentTable(props) {
 }
 
 const Cell = (props) => {
+    let score1ref = React.createRef();
+    let score2ref = React.createRef();
     let game = findGame(props.games, props.p2._id, props.p1._id);
     let leftCount = 0;
     let rightCount = 0;
@@ -207,17 +125,25 @@ const Cell = (props) => {
             : game.player1.winCount;
     }
 
-    return <td className="countCell current">
+    const updateScore = () => {
+        props.updateGameScore(game._id, score1ref.current.value, score2ref.current.value)
+    }
+
+    return <td className="countCell current" onClick={() => {
+        if (!game) {
+            props.addGameThunk(props.p1._id, props.p2._id);
+        }
+    }}>
         <div className="countWrap">
             <div className="count">
                 <div>
                   {/*  <span className="point">{leftCount}</span>*/}
-                    <input className="point" defaultValue={leftCount} />
+                    <input className="point" value={leftCount} onBlur={updateScore} ref={score1ref} />
                 </div>
                 <span className="separator">:</span>
                 <div>
                     {/*<span className="point">{rightCount}</span>*/}
-                    <input className="point" defaultValue={rightCount} />
+                    <input className="point" value={rightCount} onBlur={updateScore} ref={score2ref} />
                 </div>
             </div>
         </div>
@@ -233,5 +159,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    addPlayer, updatePlayerName, addPlayerThunk, addGameThunk
+    addPlayer, updatePlayerName, addPlayerThunk, addGameThunk,getGames,  getPlayers, updateGameScore
 })(TournamentTable);

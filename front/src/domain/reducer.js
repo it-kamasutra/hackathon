@@ -8,29 +8,10 @@ const CHANGE_PLAYER = "CHANGE_PLAYER";
 
 const initialState = {
     players: [
-        {
-            _id: "1",
-            fullName: "Seryoja Borovik"
-        },
-        {
-            _id: "2",
-            fullName: "Dimych"
-        }
+
     ],
     games: [
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            _id: 1,
-            player1: {
-                id: "1",
-                winCount: 2
-            },
-            player2: {
-                id: "2",
-                winCount: 1
-            }
-        }
+
     ]
 }
 
@@ -105,26 +86,30 @@ export const updatePlayerName = (id, fullName) => async (dispatch) => {
 
 export const getGames = () => async (dispatch) => {
     let res = await API.getGames();
-    dispatch(setGames(res.data.games));
+    dispatch(setGames(res.data));
 }
 export const getPlayers = () => async (dispatch) => {
     let res = await API.getPlayers();
     console.log(res);
-    dispatch(setPlayers(res.data.games));
+    dispatch(setPlayers(res.data));
 }
 export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     let res = await API.addGame(player1Id, player2Id);
-    dispatch(addGame(...res.data.game));
+    dispatch(addGame(...res.data));
 }
 
-export const updateGameScore = (player1Id, score1, player2Id, score2) => async (dispatch) => {
-    let res = await API.addGame(player1Id, player2Id);
+export const updateGameScore = (id, score1, score2) => async (dispatch) => {
+    let res = await API.updateGameScore(id, score1, score2);
     dispatch(addGame(...res.data.game));
 }
 export const addPlayerThunk = (fullName) => async (dispatch) => {
     let res = await API.addPlayer(fullName);
     console.log(res);
-    dispatch(addPlayer(...res.data.player));
+    dispatch(addPlayer(res.data));
+}
+export const deletePlayerThunk = (id) => async (dispatch) => {
+    let res = await API.deletePlayer(id);
+    //dispatch(deletePlayer(res.data.player.id));
 }
 
 export default reducer;

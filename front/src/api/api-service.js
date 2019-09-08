@@ -21,13 +21,16 @@ export const API = {
         return instance.post('games', {player1Id, player2Id})
     },
     updateGameScore(id, player1WinsCount, player2WinsCount) {
-        return instance.put('games', {id, player1WinsCount, player2WinsCount})
+        return instance.put('games', {id, score1: player1WinsCount, score2: player2WinsCount})
     },
     startGame(id) {
         return instance.put('games/start')
     },
     stopGame(id) {
         return instance.put('games/stop')
+    },
+    deletePlayer(id){
+        return instance.delete('players',{id})
     }
 
 };

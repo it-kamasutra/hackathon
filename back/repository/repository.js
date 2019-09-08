@@ -44,8 +44,8 @@ const getGames = () => {
     return Game.find();
 };
 
-const addPlayer = (name) => {
-    const player = new Player({name});
+const addPlayer = (fullName) => {
+    const player = new Player({fullName});
     return player.save()
 };
 
@@ -68,11 +68,11 @@ const stopGame  = (id) => {
 };
 
 
-const updateGame = (id, score1, score2) => {
-    let game = Game.find({_id: id});
+const updateGame = async (id, score1, score2) => {
+    let game = await Game.findOne({_id: id});
 
 
-    if (game) return Promise.reject();
+    if (!game) return Promise.reject();
 
     game.player1.winCount = score1;
     game.player2.winCount = score2;
@@ -80,15 +80,16 @@ const updateGame = (id, score1, score2) => {
     return game.save()
 };
 
-const findGame = (player1Id, player2Id) => {
-    let game = Game.find({ player1: {id: player1Id}, player2: {id: player2Id} });
+const findGame = async (player1Id, player2Id) => {
+    let game = await Game.findOne({ player1: {id: player1Id}, player2: {id: player2Id} });
     if (!game) {
-        game = Game.find({ player2: {id: player1Id}, player1: {id: player2Id} });
+        game = await Game.findOne({ player2: {id: player1Id}, player1: {id: player2Id} });
     }
     return game;
 }
-const addGame = (player1Id, player2Id) => {
-    let game = findGame(player1Id, player2Id);
+const addGame = async (player1Id, player2Id) => {
+    debugger
+    let game = await findGame(player1Id, player2Id);
 
     if (game) return Promise.reject();
 

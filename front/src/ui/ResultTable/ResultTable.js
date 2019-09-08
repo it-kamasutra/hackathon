@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
+import {getPlayersWithScores} from "../../selectors/games-selector";
 
 const ResultTable = (props) =>{
     return (
@@ -29,7 +30,7 @@ const ResultTable = (props) =>{
                         </td>
 
                         <td className="countCell">
-                            <span>12</span>
+                            <span>{p.totalWinCount}</span>
                         </td>
                     </tr>
 
@@ -99,7 +100,7 @@ const ResultTable = (props) =>{
 
 const mapStateToProps = (state) => {
     return {
-        players: state.players,
+        players: getPlayersWithScores(state),
         games: state.games
     }
 }

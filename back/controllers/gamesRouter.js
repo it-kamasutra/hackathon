@@ -8,7 +8,7 @@ router.get('/' , async (req, res) => {
 
 router.post('/' , async (req, res) => {
     console.log('xx\n', req);
-    res.send(await addGame(req.body.fullName));
+    res.send(await addGame(req.body.player1Id,req.body.player2Id));
 });
 
 router.put('/' , async (req, res) => {
