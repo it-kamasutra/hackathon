@@ -67,8 +67,32 @@ const stopGame  = (id) => {
     return game.save()
 };
 
+
+const updateGame = (id, score1, score2) => {
+    let game = Game.find({_id: id});
+
+
+    if (game) return Promise.reject();
+
+    game.player1.winCount = score1;
+    game.player2.winCount = score2;
+
+    return game.save()
+};
+
+const findGame = (player1Id, player2Id) => {
+    let game = Game.find({ player1: {id: player1Id}, player2: {id: player2Id} });
+    if (!game) {
+        game = Game.find({ player2: {id: player1Id}, player1: {id: player2Id} });
+    }
+    return game;
+}
 const addGame = (player1Id, player2Id) => {
-    const game = new Game({
+    let game = findGame(player1Id, player2Id);
+
+    if (game) return Promise.reject();
+
+    game = new Game({
         player1: {
             id: player1Id
         },
@@ -85,5 +109,6 @@ module.exports = {
     addPlayer,
     getGames,
     addGame,
-    deletePlayer
+    deletePlayer,
+    updateGame
 }
