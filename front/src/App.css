@@ -1,0 +1,261 @@
+.App {
+  text-align: center;
+}
+.header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 26px;
+    color: #ffffff;
+    padding: 20px 0;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #00c0f7
+}
+.tournametTableWrapper {
+    overflow-x: auto;
+
+}
+
+table#tournametCountTable {
+    margin: 20px 20px 10px;
+    border-collapse: collapse;
+
+}
+
+#tournametCountTable th.playerName, .intersection, .countCell {
+    border: 2px solid #F7F8FA;
+}
+
+th.playerName, .countCell {
+    cursor: pointer;
+}
+caption {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #353536;
+    /*color: #00C0F7;*/
+}
+
+th {
+    /*text-align: center;*/
+    width: 130px;
+    letter-spacing: 0.4px;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+}
+tr.tableHeader th {
+    text-align: center;
+}
+
+#tournametCountTable th.playerName {
+    background-color: #00C0F7;
+    color: white;
+    min-width: 170px;
+    font-weight: 500;
+}
+
+tr {
+    min-height: 50px;
+}
+
+td {
+    width: max-content;
+    min-width: 50px;
+    height: 50px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+td.logo {
+    background-image: url("./img/logoDark.svg");
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+
+
+}
+#tournametCountTable input {
+    color: #353536;
+    padding: 0 5px;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#tournametCountTable input:focus {
+    border: 1px solid #dadae1;
+}
+
+#tournametCountTable input.point, span.point {
+    max-width: 22px;
+    padding: 0 5px;
+    cursor: text;
+    color: #353536;
+}
+
+#tournametCountTable .playerName input {
+    width: 100%;
+    color: white;
+    font-weight: 500;
+}
+#tournametCountTable .countCell {
+    text-align: center;
+    background-color: #fff;
+    color: #353536;
+}
+#tournametCountTable .countWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tournametCountTable .count {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+#tournametCountTable .separator {
+    margin: 0 5px;
+}
+#tournametCountTable .intersection {
+    background-color: #ebedf2;
+    color: #07b6e8;
+    font-weight: 600;
+    cursor: default;
+    font-size: 16px;
+}
+
+#tournametCountTable th.deletePlayer {
+    width: max-content;
+}
+
+#tournametCountTable .deletePlayer span {
+    color: #C4C4C4;
+    cursor: pointer;
+    font-size: 30px;
+    transform: rotate(45deg);
+    display: inline-block;
+    width: max-content;
+    font-weight: 700;
+}
+
+#tournametCountTable .deletePlayer span:hover {
+    color: #F44336;
+}
+
+.tournametTableWrapper .addBtn {
+    text-align: left;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.tournametTableWrapper .addPlayerBtn {
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 146px;
+    color: #00C0F7;
+    font-size: 32px;
+    font-weight: 700;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    line-height: 0.8;
+    text-align: left;
+}
+
+.tournametTableWrapper .addBtn span {
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #00C0F7;
+    font-weight: 500;
+    font-size: 14px;
+    display: none;
+}
+
+
+.tournametTableWrapper .addPlayerBtn:hover {
+    transform: scale(1.2, 1.2);
+}
+
+#tournametCountTable .countCell.current, .countCell.current:hover {
+    background-color: #88ffbd;
+}
+
+#tournametCountTable .countCell.next, .countCell.next:hover {
+    background-color: #FFFF99;
+}
+
+
+
+/*-----------------------result table-----------------------*/
+
+table#resultsTable {
+    margin: 80px 76px 10px;
+    border-collapse: collapse;
+    margin-bottom: 100px;
+}
+
+table#resultsTable td {
+    height: 40px;
+}
+
+#resultsTable th.cellHeader, .countCell {
+    border: 2px solid #F7F8FA;
+}
+
+#resultsTable th.cellHeader, .countCell {
+    cursor: pointer;
+}
+
+#resultsTable th.cellHeader {
+    background-color: #00C0F7;
+    color: white;
+    min-width: 140px;
+    font-weight: 500;
+    padding: 15px;
+    text-align: center;
+}
+
+#resultsTable .countCell {
+    text-align: center;
+    background-color: #fff;
+    color: #353536;
+    font-weight: 700;
+    font-size: 14px;
+}
+#resultsTable .countCell.name {
+    font-weight: 700;
+    text-align: left;
+}
+
+#resultsTable th.cellHeader.position {
+    min-width: 105px;
+    width: 105px;
+}
+
+#resultsTable th.cellHeader.playerName {
+    min-width: 260px;
+    width: 260px;
+}
+
+
+.resultsTableWrapper #resultsTable tr.player:nth-child(2n+1) .countCell {
+    background-color: #ebedf2;
+}
+
+
+
+
+
+
+
+
+
