@@ -8,8 +8,9 @@ function App() {
     return (
         <div>
             <Header/>
-            <ResultTable/>
             <TournamentTable/>
+            <ResultTable/>
+
         </div>
     );
 }

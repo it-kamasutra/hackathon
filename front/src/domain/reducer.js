@@ -15,11 +15,11 @@ const initialState = {
             endDate: new Date(),
             _id: 1,
             player1: {
-                _id: 1,
+                id: 1,
                 winCount: 1
             },
             player2: {
-                _id: 1,
+                id: 1,
                 winCount: 1
             }
         }
