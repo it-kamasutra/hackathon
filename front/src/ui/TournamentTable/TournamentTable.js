@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {addGameThunk, addPlayerThunk, updatePlayerName} from "../../domain/reducer";
+import {addGameThunk, addPlayerThunk, getPlayers, updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 
@@ -14,7 +14,9 @@ function findGame(games, p1Id, p2Id) {
 function TournamentTable(props) {
     const {players, games, updatePlayerName} = props;
 
-
+    useEffect(() => {
+        props.getPlayers();
+    }, []);
 
 
     console.log(players);
@@ -220,7 +222,7 @@ function TournamentTable(props) {
 */}
                 </table>
                 <div className="addBtn">
-                    <button onClick={(()=>{props.addPlayerThunk("player new");})} className="addPlayerBtn">+</button>
+                    <button onClick={()=>{props.addPlayerThunk("player new");}} className="addPlayerBtn">+</button>
                     <span>Добавьте участников</span>
                 </div>
             </div>
@@ -237,5 +239,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    addPlayer, updatePlayerName, addPlayerThunk, addGameThunk
+    addPlayer, updatePlayerName, addPlayerThunk, addGameThunk, getPlayers
 })(TournamentTable);
