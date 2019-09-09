@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {addPlayer} from "../../domain/reducer";
 
 function TournamentTable(props) {
     const {players} = props
@@ -195,7 +196,10 @@ function TournamentTable(props) {
 */}
                 </table>
                 <div className="addBtn">
-                    <button className="addPlayerBtn">+</button>
+                    <button className="addPlayerBtn"
+                            onClick={() => {
+                                props.addPlayer("1", "Player");
+                            }}>+</button>
                     <span>Добавьте участников</span>
                 </div>
             </div>
@@ -209,5 +213,12 @@ const mapStateToProps = (state) => {
         games: state.games
     }
 }
+// const mapDispatchToProps=(dispatch)=>{
+//      addPlayer: (id="1", fullName="Player") => {
+//          dispatch(addPlayer(id, fullName))
+//      }
+// }
 
-export default connect(mapStateToProps)(TournamentTable);
+export default connect(mapStateToProps, {
+    addPlayer
+})(TournamentTable);
