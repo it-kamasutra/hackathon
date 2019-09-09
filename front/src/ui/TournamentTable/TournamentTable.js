@@ -4,7 +4,6 @@ import {addGameThunk, updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 function TournamentTable(props) {
-    props.addGameThunk(1, 2);
     const {players} = props
 
     console.log(players);

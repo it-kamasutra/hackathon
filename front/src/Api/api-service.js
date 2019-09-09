@@ -8,10 +8,10 @@ export const API = {
     getPlayers() {
         return instance.get('players')
     },
-    addPlayer(name) {
+    addPlayer(fullName) {
         return instance.post('players', {fullName})
     },
-    updatePlayer(id, name) {
+    updatePlayer(id, fullName) {
         return instance.put('players', {id, fullName})
     },
     getGames() {
