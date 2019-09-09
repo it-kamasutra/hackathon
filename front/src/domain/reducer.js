@@ -2,7 +2,8 @@ import {API} from "../api/api-service";
 
 const ADD_PLAYER = "ADD_PLAYER";
 const ADD_GAME = "ADD_GAME";
-const SET_GAME = "SET_GAME";
+const SET_GAMES = "SET_GAMES";
+const SET_PLAYERS = "SET_PLAYERS";
 const CHANGE_PLAYER = "CHANGE_PLAYER";
 
 const initialState = {
@@ -59,10 +60,16 @@ const reducer = (state = initialState, action) => {
                 }]
             }
         }
-        case SET_GAME : {
+        case SET_GAMES : {
             return {
                 ...state,
                 games: action.games
+            }
+        }
+        case SET_PLAYERS : {
+            return {
+                ...state,
+                players: action.players
             }
         }
         case CHANGE_PLAYER: {
@@ -82,7 +89,8 @@ export const addPlayer = (_id, fullName) => {
 const addGame = (startDate, endDate, _id, _id1, _id2, winCount1, winCount2) => {
     return { type: ADD_GAME, startDate, endDate, _id, _id1, _id2, winCount1, winCount2 };
 }
-const setGames = (games) => ({type: SET_GAME, games});
+const setGames = (games) => ({type: SET_GAMES, games});
+const setPlayers = (players) => ({type: SET_PLAYERS, players});
 
 const changePlayer = (newPlayerName) => {
     return {type: CHANGE_PLAYER, newPlayerName};
@@ -97,6 +105,11 @@ export const updatePlayerName = (fullName) => (dispatch) => {
 export const getGames = () => async (dispatch) => {
     let res = await API.getGames();
     dispatch(setGames(res.data.games));
+}
+export const getPlayers = () => async (dispatch) => {
+    let res = await API.getPlayers();
+    console.log(res);
+    dispatch(setPlayers(res.data.games));
 }
 export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     let res = await API.addGame(player1Id, player2Id);
