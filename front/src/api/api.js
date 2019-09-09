@@ -4,3 +4,8 @@ const instance = axios.create({
     baseURL: "localhost:3020"
 });
 
+export const API = {
+    getPlayers() {
+        return instance.get('players/')
+    }
+};
