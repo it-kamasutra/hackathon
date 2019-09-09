@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updatePlayerName} from "../../domain/reducer";
+import {addGameThunk, updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
 function TournamentTable(props) {
+    props.addGameThunk(1, 2);
     const {players} = props
 
     console.log(players);
@@ -214,5 +215,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    addPlayer, updatePlayerName
+    addPlayer, updatePlayerName, addGameThunk
 })(TournamentTable);
