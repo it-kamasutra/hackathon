@@ -1,4 +1,4 @@
-const {getPlayers, addPlayer} = require("../repository/repository");
+const {getPlayers, addPlayer, deletePlayer} = require("../repository/repository");
 const express = require('express');
 const router = express.Router();
 
@@ -10,8 +10,8 @@ router.post('/' , async (req, res) => {
     res.send(await addPlayer(req.body.fullName));
 });
 
-router.delete('/' , async (req, res) => {
-    res.send(await (()=>{})());
+router.delete('/:id' , async (req, res) => {
+    res.send(await deletePlayer(req.params.id));
 });
 
 module.exports = router;

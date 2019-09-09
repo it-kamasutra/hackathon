@@ -84,5 +84,6 @@ module.exports = {
     getPlayers,
     addPlayer,
     getGames,
-    addGame
+    addGame,
+    deletePlayer
 }
