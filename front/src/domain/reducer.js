@@ -23,11 +23,11 @@ const initialState = {
             _id: 1,
             player1: {
                 id: "1",
-                winCount: 0
+                winCount: 2
             },
             player2: {
                 id: "2",
-                winCount: 2
+                winCount: 1
             }
         }
     ]
@@ -96,12 +96,10 @@ export const updatePlayerName = (fullName) => (dispatch) => {
 
 export const getGames = () => async (dispatch) => {
     let res = await API.getGames();
-    console.log(res);
     dispatch(setGames(res.data.games));
 }
 export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     let res = await API.addGame(player1Id, player2Id);
-    console.log(res);
     dispatch(addGame(...res.data.game));
 }
 export const addPlayerThunk = (fullName) => async (dispatch) => {
