@@ -23,7 +23,7 @@ function TournamentTable(props) {
 
     const headerTournamentTable = players.map( pl => {
             return (
-                <th className="playerName ">
+                <th className="playerName " key={pl._id}>
                     {pl.fullName}
                 </th>
             )
@@ -37,7 +37,7 @@ function TournamentTable(props) {
             </th>
             <th className="playerName">
                 {/*<span >Валера</span>*/}
-                <input defaultValue={p1.fullName}></input>
+                <input defaultValue={p1.fullName} key={p1._id}></input>
             </th>
 
             {/*<td className="intersection"></td>*/}
