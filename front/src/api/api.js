@@ -14,6 +14,9 @@ export const API = {
     updatePlayer(id, name) {
         return instance.put('players', {id, fullName})
     },
+    deletePlayer(id) {
+        return instance.delete('player/' + id)
+    },
     getGames() {
         return instance.get('games')
     },
