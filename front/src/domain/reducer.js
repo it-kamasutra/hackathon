@@ -22,12 +22,12 @@ const initialState = {
             endDate: new Date(),
             _id: 1,
             player1: {
-                id: 1,
-                winCount: 1
+                id: "1",
+                winCount: 0
             },
             player2: {
-                id: 1,
-                winCount: 1
+                id: "2",
+                winCount: 2
             }
         }
     ]

@@ -3,6 +3,18 @@ import {connect} from 'react-redux';
 import {addGameThunk, updatePlayerName} from "../../domain/reducer";
 import {addPlayer} from "../../domain/reducer";
 
+
+function findGame(games, p1Id, p2Id) {
+    let oneGame = games.find((game) => {
+        //let id
+        return game
+    });
+
+    return oneGame;
+    // todo: implement function
+    // return found game
+}
+
 function TournamentTable(props) {
     const {players} = props
 
