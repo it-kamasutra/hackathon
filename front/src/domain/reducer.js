@@ -104,5 +104,10 @@ export const addGameThunk = (player1Id, player2Id) => async (dispatch) => {
     console.log(res);
     dispatch(addGame(...res.data.game));
 }
+export const addPlayerThunk = (fullName) => async (dispatch) => {
+    let res = await API.addPlayer(fullName);
+    console.log(res);
+    dispatch(addPlayer(...res.data.player));
+}
 
 export default reducer;
