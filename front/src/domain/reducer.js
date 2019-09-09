@@ -1,5 +1,8 @@
+import {API} from "../api/api-service";
+
 const ADD_PLAYER = "ADD_PLAYER";
 const ADD_GAME = "ADD_GAME";
+const SET_GAME = "SET_GAME";
 const CHANGE_PLAYER = "CHANGE_PLAYER";
 
 const initialState = {
@@ -56,6 +59,12 @@ const reducer = (state = initialState, action) => {
                 }]
             }
         }
+        case SET_GAME : {
+            return {
+                ...state,
+                games: action.games
+            }
+        }
         case CHANGE_PLAYER: {
             return {
                 ...state,
@@ -73,6 +82,7 @@ export const addPlayer = (_id, fullName) => {
 const addGame = (startDate, endDate, _id, _id1, _id2, winCount1, winCount2) => {
     return { type: ADD_GAME, startDate, endDate, _id, _id1, _id2, winCount1, winCount2 };
 }
+const setGames = (games) => ({type: SET_GAME, games});
 
 const changePlayer = (newPlayerName) => {
     return {type: CHANGE_PLAYER, newPlayerName};
@@ -82,6 +92,12 @@ export const updatePlayerName = (fullName) => (dispatch) => {
     // setTimeout(() => {
     //     dispatch(changePlayer(fullName))
     // })
+}
+
+export const getGames = () => async (dispatch) => {
+    let res = await API.getGames();
+    console.log(res);
+    dispatch(setGames(res.data.games));
 }
 
 export default reducer;
